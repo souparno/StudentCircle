@@ -1,1 +1,1 @@
-[{"name":"Menu 1","child":[{"name":"Menu 1-sub 1","child":[]},{"name":"Menu 1 - sub 2","child":[]}]},{"name":"Menu 2","child":[{"name":"Menu 2 - sub 1","child":[{"name":"Menu 2 - sub 1 - sub 1","child":[]}]}]},{"name":"Menu 3","child":[]}]
+[{"name":"Menu 1","child":[]},{"name":"Menu 2","child":[]},{"name":"Menu 3","child":[]}]

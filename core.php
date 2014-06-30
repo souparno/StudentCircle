@@ -38,13 +38,26 @@ switch ($_GET["a"]) {
         if (file_put_contents("menus.txt", json_encode($arr))) {
             echo json_encode(
                     array(
-                        'notification'=>'menu created successfully'
+                        'notification' => 'menu created successfully'
                     )
-                    );
+            );
         }
 
 
         break;
+
+    case "delmenu":
+
+        if (file_put_contents("menus.txt", json_encode(array()))) {
+            echo json_encode(
+                    array(
+                        'notification' => 'menu deleted successfully'
+                    )
+            );
+        }
+
+        break;
+
     case "fa":
         $lines = explode("\n", file_get_contents("menus.txt"));
         echo file_get_contents("menus.txt");
@@ -92,7 +105,7 @@ switch ($_GET["a"]) {
         $mail->AddAddress($recipient);
         $mail->Subject = $landlord_address . ' Inventory Report';
         $mail->Body = "Inventory Report\n\nLandlord: " . $landlord_name . "\nAddress: " . $landlord_address . "\n\n\nPlease view the attached PDF for detailed information";
-       
+
         $mail->AddAttachment($pdfname);
         $mail->Username = "noreply@nisclient.com";
         $mail->Password = "@admin2013";

@@ -1,7 +1,7 @@
 var base = {"address": "", "landlord": ""};
 var submenu_defaults = ["Floor", "Window", "Door", "Lights", "Curtains"];
 var data = {};
-var parent_section={};
+var parent_section = {};
 var sections = {};
 var dataset = {};
 var selected_section = null;
@@ -46,7 +46,7 @@ $(document).ready(function() {
     //Loading the respective view for the user
     if (is_admin)
         loadContent('admin.html', adminPage);
-        //loadContent('sections.html', sectionsPage);
+    //loadContent('sections.html', sectionsPage);
     else
         loadContent('address.html', addressPage);
 
@@ -101,6 +101,30 @@ function adminPage() {
             contentType: "application/json; charset=utf-8",
             success: function(data) {
                 alert(data.notification);
+            },
+            error: function(x, status, error) {
+                alert(status + ": " + error);
+            }
+
+        });
+        adminPage();
+
+    });
+
+
+    // event handler to delete menu
+    $("#deldata").click(function(event) {
+        event.preventDefault();
+
+
+        $.ajax({
+            type: "POST",
+            url: "core.php?a=delmenu",
+            dataType: "json",
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                alert(data.notification);
 
             },
             error: function(x, status, error) {
@@ -111,6 +135,9 @@ function adminPage() {
         adminPage();
 
     });
+
+
+
 }
 
 
@@ -159,10 +186,10 @@ function sectionsPage() {
 
         $("._section").click(function(event) {
             event.preventDefault();
-          
+
             selected_section = $(this).attr("data-menuvalue");
             tagtitle += sections[selected_section].name + " &#8594; ";
-            parent_section=sections[selected_section];
+            parent_section = sections[selected_section];
             console.log(parent_section);
             sections = sections[selected_section].child;
             createSections("top", sections);
@@ -185,7 +212,7 @@ function sectionsPage() {
         });
 
         $("#adddata").click(function(event) {
-             //console.log(sections);
+            //console.log(sections);
             loadContent(tagprefix + 'tag.html', tagPage);
         });
 
@@ -197,7 +224,7 @@ function sectionsPage() {
     }
 
     tagtitle = "";
-    
+
     sections = dataset;
     //parent_section=sections;
     createSections("top", sections);
@@ -268,8 +295,8 @@ function tagPage() {
     function loadData() {
 
         //var d = sections;
-        
-        
+
+
         if (parent_section.condition)
             $("#conditiontxt").val(parent_section.condition);
 
@@ -323,13 +350,13 @@ function tagPage() {
         });
         if (imgs.indexOf(","))
             imgs = imgs.substring(0, imgs.length - 1);
-       
-       
+
+
         parent_section.tags = $("#tags").val();
         parent_section.images = imgs,
-        parent_section.conditioin = $("#conditiontxt").val();
-        
-        
+                parent_section.conditioin = $("#conditiontxt").val();
+
+
         console.log(dataset);
         loadContent('sections.html', sectionsPage);
     });
@@ -348,7 +375,7 @@ function tagPage() {
     $("#finishbtn").click(function(event) {
         event.preventDefault();
         loadContent('email.html', sendReportPage);
-    }); 
+    });
 
 }
 
