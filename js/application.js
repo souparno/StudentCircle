@@ -1,6 +1,7 @@
 var base = {"address": "", "landlord": ""};
 var submenu_defaults = ["Floor", "Window", "Door", "Lights", "Curtains"];
 var data = {};
+var parent_section={};
 var sections = {};
 var dataset = {};
 var selected_section = null;
@@ -20,7 +21,7 @@ $(document).ready(function() {
             navigator.mozGetUserMedia ||
             navigator.msGetUserMedia);
 
-    if (navigator.getUserMedia == null) {
+    if (navigator.getUserMedia === null) {
         tagprefix = "legacy-";
     }
     else {
@@ -45,6 +46,7 @@ $(document).ready(function() {
     //Loading the respective view for the user
     if (is_admin)
         loadContent('admin.html', adminPage);
+        //loadContent('sections.html', sectionsPage);
     else
         loadContent('address.html', addressPage);
 
@@ -88,8 +90,8 @@ function adminPage() {
         var menuname = $("#menuname").val();
 
         /*$.get('core.php?a=createmenu&&parent=' + menuparent + '&&name=' + menuname, function(data) {
-            $("#notice").html($.parseJSON(data));
-        });*/
+         $("#notice").html($.parseJSON(data));
+         });*/
 
         $.ajax({
             type: "POST",
@@ -106,9 +108,8 @@ function adminPage() {
             }
 
         });
+        adminPage();
 
-                adminPage();
-        
     });
 }
 
@@ -141,9 +142,7 @@ function sectionsPage() {
             createBtn = "createSubBtn";
 
         for (var key in source) {
-            //if (isNumber(key)) key = source[key];
 
-            //html += '<li class="btn btn-default _section" data-sectiontype="' + sectionType + '" data-menuvalue="' + key + '"><a href="javascript:void(0)"><span class="glyphicon glyphicon-list"></span><span class="BtnTitle">' + key + '</span></a></li>';
             html += '<li class="btn btn-default _section" data-sectiontype="" data-menuvalue="' + key + '">\n\
                         <a href="javascript:void(0)">\n\
                             <span class="glyphicon glyphicon-list"></span>\n\
@@ -157,53 +156,60 @@ function sectionsPage() {
     }
 
     function setHandlers() {
+
+        $("._section").click(function(event) {
+            event.preventDefault();
+          
+            selected_section = $(this).attr("data-menuvalue");
+            tagtitle += sections[selected_section].name + " &#8594; ";
+            parent_section=sections[selected_section];
+            console.log(parent_section);
+            sections = sections[selected_section].child;
+            createSections("top", sections);
+
+            /*if ((sections[selected_section].child).length) {
+             sections = sections[selected_section].child;
+             createSections("top", sections);
+             }
+             else
+             loadContent(tagprefix + 'tag.html', tagPage); */
+        });
+
         $("#createSectionBtn").click(function(event) {
             event.preventDefault();
             loadContent('createsection.html', createSectionPage);
-        });
-
-        /*$("#createSubBtn").click(function(event) {
-         event.preventDefault();
-         loadContent('createsub.html', createSubPage);
-         });*/
-        $("._section").click(function(event) {
-            event.preventDefault();
-
-            selected_section = $(this).attr("data-menuvalue");
-            tagtitle += sections[selected_section].name + " &#8594; ";
-
-            if ((sections[selected_section].child).length) {
-                sections = sections[selected_section].child;
-                createSections("top", sections);
-            }
-            else
-                loadContent(tagprefix + 'tag.html', tagPage);
         });
 
         $("#backbtn").click(function(event) {
             sectionsPage();
         });
 
+        $("#adddata").click(function(event) {
+             //console.log(sections);
+            loadContent(tagprefix + 'tag.html', tagPage);
+        });
+
         $("#finishbtn").click(function(event) {
             event.preventDefault();
             loadContent('email.html', sendReportPage);
         });
+
     }
 
     tagtitle = "";
+    
     sections = dataset;
+    //parent_section=sections;
     createSections("top", sections);
 }
 
 function createSectionPage() {
-
 
     $("#createSectionBtn").click(function(event) {
         event.preventDefault();
         sections.push({});
         sections[sections.length - 1].name = $("#sectiontxt").val();
         sections[sections.length - 1].child = [];
-        //console.log(sections);
         loadContent('sections.html', sectionsPage);
     });
 
@@ -213,62 +219,69 @@ function createSectionPage() {
     });
 }
 
-function createSubPage() {
-    $("#createSubBtn").click(function(event) {
-        event.preventDefault();
-        sections[selected_section].push($("#subtxt").val());
-        loadContent('sections.html', sectionsPage);
-    });
-
-    $("#cancelBtn").click(function(event) {
-        event.preventDefault();
-        loadContent('sections.html', sectionsPage);
-    });
-}
+/*function createSubPage() {
+ $("#createSubBtn").click(function(event) {
+ event.preventDefault();
+ sections[selected_section].push($("#subtxt").val());
+ loadContent('sections.html', sectionsPage);
+ });
+ 
+ $("#cancelBtn").click(function(event) {
+ event.preventDefault();
+ loadContent('sections.html', sectionsPage);
+ });
+ }*/
 
 function tagPage() {
-    function sendFile(file) {
-        var fd = new FormData();
-        fd.append("imgfile", file);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'core.php?a=fu', true);
+    (function() {
+        function sendFile(file) {
+            var fd = new FormData();
+            fd.append("imgfile", file);
 
-        xhr.onload = function() {
-            if (this.status === 200) {
-                var resp = JSON.parse(this.response);
-                addImageCombo(resp.id, resp.url);
-            }
-        };
-        xhr.send(fd);
-    }
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'core.php?a=fu', true);
 
-    function addImageCombo(id, url) {
-        $("#photocontainer").append('<img id="img_' + id + '" src="' + url + '" style="max-width: 70%;margin-top:10px" class="imgattachment" />');
-        $("#photocontainer").append('<button id="btn_' + id + '" class="btn btn-danger" data-imgid="' + id + '" style="width:50%;margin-top:10px" >Delete</button>');
-        $("#btn_" + id).click(function(event) {
-            event.preventDefault();
-            $("#img_" + $(this).attr("data-imgid")).remove();
-            $(this).remove();
-        });
-    }
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    var resp = JSON.parse(this.response);
+                    addImageCombo(resp.id, resp.url);
+                }
+            };
+            xhr.send(fd);
+        }
+    }());
+
+    (function() {
+        function addImageCombo(id, url) {
+            $("#photocontainer").append('<img id="img_' + id + '" src="' + url + '" style="max-width: 70%;margin-top:10px" class="imgattachment" />');
+            $("#photocontainer").append('<button id="btn_' + id + '" class="btn btn-danger" data-imgid="' + id + '" style="width:50%;margin-top:10px" >Delete</button>');
+            $("#btn_" + id).click(function(event) {
+                event.preventDefault();
+                $("#img_" + $(this).attr("data-imgid")).remove();
+                $(this).remove();
+            });
+        }
+    }());
+
 
     function loadData() {
 
-        var d = sections[0];
+        //var d = sections;
+        
+        
+        if (parent_section.condition)
+            $("#conditiontxt").val(parent_section.condition);
 
-        if (d.condition)
-            $("#conditiontxt").val(d.condition);
-
-        if (d.tags) {
-            var tags = d.tags.split(",");
+        if (parent_section.tags) {
+            var tags = parent_section.tags.split(",");
             for (var i = 0; i < tags.length; i++) {
                 $("#tags").addTag(tags[i]);
             }
         }
 
-        if (d.images) {
-            var images = d.images.split(",");
+        if (parent_section.images) {
+            var images = parent_section.images.split(",");
             if (images[0] !== "") {
                 for (var i = 0; i < images.length; i++) {
                     var url = images[i];
@@ -310,18 +323,14 @@ function tagPage() {
         });
         if (imgs.indexOf(","))
             imgs = imgs.substring(0, imgs.length - 1);
-        //if (!data[selected_section])   data[selected_section] = {};
-        //data[selected_section][selected_sub] = {"tags": $("#tags").val(), "images": imgs, "condition": $("#conditiontxt").val()};
-        //sections={"tags": $("#tags").val(), "images": imgs, "condition": $("#conditiontxt").val()};
-        /*for (var key in sections) {
-         sections[key].tags=$("#tags").val();
-         sections[key].images=imgs,
-         sections[key].conditioin= $("#conditiontxt").val();       
-         }*/
-        sections[0].tags = $("#tags").val();
-        sections[0].images = imgs,
-                sections[0].conditioin = $("#conditiontxt").val();
-        //console.log(dataset);
+       
+       
+        parent_section.tags = $("#tags").val();
+        parent_section.images = imgs,
+        parent_section.conditioin = $("#conditiontxt").val();
+        
+        
+        console.log(dataset);
         loadContent('sections.html', sectionsPage);
     });
 
@@ -339,7 +348,7 @@ function tagPage() {
     $("#finishbtn").click(function(event) {
         event.preventDefault();
         loadContent('email.html', sendReportPage);
-    });
+    }); 
 
 }
 
