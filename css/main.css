@@ -1,0 +1,306 @@
+/*Changes is defaul Classes*/
+
+.container{ padding:0px; max-width:100%;}
+.jumbotron{ padding:0px;}
+.row{ margin:0px;}
+
+
+/*Custom CSS Classes*/
+
+@font-face {
+font-family: "Myriad Web Pro";
+src: url('../fonts/277313233-myriad-web-pro.eot');
+src: url('../fonts/277313233-myriad-web-pro.eot?#iefix') format('embedded-opentype'),
+url('../fonts/277313233-myriad-web-pro.svg#Myriad Web Pro') format('svg'),
+url('../fonts/277313233-myriad-web-pro.woff') format('woff'),
+url('../fonts/277313233-myriad-web-pro.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+body{ background:url(../img/app-pattern.png) 0 0 repeat; font-family: "Myriad Web Pro", Arial, Helvetica, sans-serif;}
+
+
+.TwoColLayout{ margin:20px 0;}
+.TwoColLayout img{ max-width:100%;}
+.TwoColLayout .LeftCol{ width:70%; float:left; padding:0 0 0 0px; text-align:center;}
+.TwoColLayout .RightCol{ width:30%; float:right; padding:0 0 0 10px; text-align:center;}
+
+
+
+.container .LandingScreen{ text-align:center;}
+.container .LandingScreen img{ max-width:100%;}
+
+.AppControls{ height:58px; padding:10px; border-top:solid 1px #adadad; border-bottom:solid 1px #adadad;}
+.AppControls a.btn{ border-radius:12px; border:solid 1px #000; color:#fff; padding:4px 12px 6px 12px;}
+.AppControls a.btn:active{ background:#000;}
+.AppControls a i{ font-size:11px; border-radius:100%; background-color:#000; border: solid 1px #473c3c; padding:7px; margin:0 5px 0 0;}
+.AppControls a span{ display:inline-block; padding:5px 0 0 0;}
+
+.AppControls .AppLeftControls{ float:left;}
+.AppControls .AppRightControls{ float:right;}
+
+
+.headerSection{ width:100%;}
+.headerSection .logo{ text-align:center; padding:30px 0;}
+.headerSection .logo img{ max-width:60%;}
+
+.headerSectionInner{ width:100%;}
+.headerSectionInner .logo{ text-align:center; padding:5px 0;}
+.headerSectionInner .logo img{ max-width:50%;}
+
+.pro-lable{ width:100%; margin:30px auto 0px auto; padding:10px; text-align:center; font-size:20px; color:#fff; font-weight:normal; text-transform:uppercase; background-color:#000;}
+.form-horizontal {text-align:center; width:85%;	margin:0 7.5% 50px 7.5%;}
+.form-horizontal .form-control {margin:10px 0; background-color:#f1f1f1;}
+.form-horizontal input[type="submit"] {font-size:20px; color:#fff; background-color:#f1650d; border-top: 2px groove #FF0000; padding:3px 0;}
+
+
+
+
+ul.NavLevelOne{ width:88%; margin:0px auto; padding:0px; list-style:none; text-align:center;}
+ul.NavLevelOne li{margin:16px;  padding:10px 20px; min-width:130px; }
+ul.NavLevelOne li.FullWidthBtn{ width:88%; margin:20px auto; padding:3px 0; display:block;}
+ul.NavLevelOne li.BtnAdj{padding:3px 20px;}
+ul.NavLevelOne li a{ color:#333; font-size:17px}
+ul.NavLevelOne li a span{ display:block; margin-bottom:10px; font-size:20px}
+ul.NavLevelOne li a span.TxtAdj{ display:block; min-height:44px; font-size:20px; white-space:normal; line-height:22px; max-width:85px;}
+ul.NavLevelOne li:hover a{ text-decoration:none; color:#f1650d}
+
+form button.FullWidthBtn{ width:88%; margin:20px auto; padding:10px 0; display:block; font-size:30px}
+form button span{ display:inline-block; margin:0 20px 0px 0; font-size:30px;}
+
+
+.TakePhoto{ width:100%; text-align:center; margin:30px 0;}
+.TakePhoto label{ max-width:100%; cursor:pointer;}
+.TakePhoto label img{ max-width:100%;}
+.TakePhoto input{display: none;}
+
+/*Added Photo Controls*/
+.btn-xlarge{ position:relative;  vertical-align:bottom;  margin:0px 0px 10px 0px;  width:80%; font-size:23px;  color:white;  text-align:center;  text-shadow:0 1px 2px rgba(0,0,0,0.25);  background:#62b1d0;  border:0; cursor:pointer;}
+.btn-xlarge:active, .btn-xlarge:focus{ top:0px;  outline:none;  -webkit-box-shadow:none;  box-shadow:none;  color:#fff}
+.btn-xlarge:hover{ background:#F47720;}
+
+
+/*Images Slider*/
+#PropImagesCarousel{ width:90%; margin:20px auto;}
+
+/*Related Tags*/
+
+.tokenfield{ margin:15px 0;}
+.tokenfield .token{ height:auto; padding:2px 5px 0 5px; background-color:#FBA415; border-color:#F1650D; color:#fff; font-weight:bold; font-size:16px; font-family:Arial;}
+.tokenfield .token-input { padding:5px 0 0 0; height:30px;}
+.tokenfield.focus{}
+
+
+/**/
+
+.BtnDelete{background-color:#D2322D; border-color:#870101; -webkit-box-shadow:inset 0 -3px #870101;  box-shadow:inset 0 -3px #870101}
+.BtnDelete:hover{ background-color:#870101; color:#fff;}
+
+.BtnAdd{background-color:#39B3D7; border-color:#0a85a9; -webkit-box-shadow:inset 0 -3px #0a85a9;  box-shadow:inset 0 -3px #0a85a9}
+.BtnAdd:hover{ background-color:#0a85a9; color:#fff;}
+
+.BtnOk{background-color:#47A447; border-color:#128812; -webkit-box-shadow:inset 0 -3px #128812;  box-shadow:inset 0 -3px #128812}
+.BtnOk:hover{ background-color:#128812; color:#fff;}
+
+
+/*Misc Classes*/
+
+.InfoBtnOne{ width:88%; margin:0 auto; text-align:center; padding:3px 0; color:#fff; font-size:20px; border-radius:5px; background-color:#f1650d; border-top: 2px groove #FF0000;}
+.InfoBtnTwo{ display:block; width:88%; min-height:50px; margin:15px auto; text-align:center; padding:20px 0; color:#fff; font-size:20px; border-radius:5px; border:0px; }
+
+.InfoBtnThree{ display:block; width:88%; min-height:50px; margin:15px auto; text-align:center; padding:20px 0; color:#000; font-size:20px; border-radius:5px; border:1px solid #ADADAD; }
+
+.Spacer{ height:50px; width:100%;}
+
+
+/* Flex Slider Classes*/
+
+
+/* Browser Resets */
+.flex-container a:active, .flexslider a:active{outline:none}
+.slides, .flex-control-nav, .flex-direction-nav{margin:0; padding:0; list-style:none}
+/* FlexSlider Necessary Styles
+*********************************/ 
+.flexslider{margin:0; padding:0; position:relative; height: auto}
+.flexslider .slides >li{display:none}/* Hide the slides before the JS is loaded. Avoids image jumping */
+
+.flexslider .slides img{max-width:100%; display:block}
+.flex-pauseplay span{text-transform:capitalize}
+
+/* Clearfix for the .slides element */
+.slides:after{content:"."; display:block; clear:both; visibility:hidden; line-height:0; height:0}
+
+.no_slider{margin:0; padding:0; position:relative; height: auto}
+
+.no_slider.image_text{position:absolute; top:16px; left:25px; z-index:999; width:315px; color:#666}
+
+.no_slider .slides img{max-width:100%; display:block}
+
+ .no_slider.text_black{color:#666}
+.no_slider .image_text.text_black h1{color:#666; text-shadow:none!important}
+.no_slider .image_text ul{margin-left:20px}
+.no_slider .image_text h1{color:#fff; font-size:42px; text-shadow:2px 2px 2px #333!important}
+.no_slider .image_text a{font-size:12px; color:#f96!important}
+
+html[xmlns] .slides{display:block}
+* html .slides{height:1%}
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides >li:first-child{display:block}
+/* FlexSlider Default Theme
+*********************************/
+.flexslider{background:none; position:relative}
+.flexslider .slides{zoom:1}
+.flexslider .slides >li{position:relative}
+/* Suggested container for "Slide"animation setups. Can replace this with your own, if you wish */
+.flex-container{zoom:1; position:relative}
+/* Caption style */
+/* IE rgba() hack */
+ 
+/* Direction Nav */
+.flex-direction-nav li a{width:30px; height:30px; margin:0; display:block; background:url(../img/bg_direction_nav.png) no-repeat 0 0; position:absolute; bottom:-45px; cursor:pointer; text-indent:-9999px}
+.flex-direction-nav li .next{background-position:-29px 1px; right:15px}
+.flex-direction-nav li .prev{left:15px}
+.flex-direction-nav li .disabled{opacity:.3; filter:alpha(opacity=30); cursor:default}
+/* Control Nav */
+.flex-control-nav{width:100%; position:absolute; bottom:-30px; text-align:left; bottom:12px; left:10px}
+.flex-control-nav li{margin:0 0 0 5px; display:inline-block; zoom:1; *display:inline}
+.flex-control-nav li:first-child{margin:0}
+.flex-control-nav li a{width:13px; height:13px; display:block; background:url(../img/bg_control_nav.png) no-repeat 0 0; cursor:pointer; text-indent:-9999px}
+.flex-control-nav li a:hover{background-position:0 -13px}
+.flex-control-nav li a.active{background-position:0 -26px; cursor:default}
+
+
+/* Gradient Colors/Themes */
+
+.GradientOrange{
+background: #ffc20e;
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmMyMGUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjM3MTIxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-radial-gradient(center, ellipse cover,  #ffc20e 0%, #f37121 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffc20e), color-stop(100%,#f37121));
+background: -webkit-radial-gradient(center, ellipse cover,  #ffc20e 0%,#f37121 100%);
+background: -o-radial-gradient(center, ellipse cover,  #ffc20e 0%,#f37121 100%);
+background: -ms-radial-gradient(center, ellipse cover,  #ffc20e 0%,#f37121 100%);
+background: radial-gradient(ellipse at center,  #ffc20e 0%,#f37121 100%);
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc20e', endColorstr='#f37121',GradientType=1 );*/
+filter: none;
+	
+}
+
+.GradientDarkerGray{
+
+background: #7e7c7f; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdlN2M3ZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1YzVhNWIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #7e7c7f 0%, #5c5a5b 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7e7c7f), color-stop(100%,#5c5a5b)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #7e7c7f 0%,#5c5a5b 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #7e7c7f 0%,#5c5a5b 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #7e7c7f 0%,#5c5a5b 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #7e7c7f 0%,#5c5a5b 100%); /* W3C */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e7c7f', endColorstr='#5c5a5b',GradientType=0 );*/ /* IE6-8 */
+filter: none;
+
+}
+
+
+.GradientLighterGray{
+
+background: #eeeeee; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjY2NjY2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );*/ /* IE6-8 */
+filter: none;
+	
+}
+
+.GradientBlack{
+
+background: #45484d; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1NDg0ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #45484d 0%,#000000 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #45484d 0%,#000000 100%); /* W3C */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );*/ /* IE6-8 */
+filter: none;
+	
+}
+
+/*************** Media sizes *************/
+
+
+@media (min-width: 300px) and  (max-width: 320px) {
+
+ul.NavLevelOne{ margin:0px; width:100%;} 
+ul.NavLevelOne li { margin:6px;} 
+
+
+}
+
+@media (min-width: 321px) and  (max-width: 360px) {
+	
+ul.NavLevelOne{} 
+ul.NavLevelOne li{margin:6px !important;}
+
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+
+ul.NavLevelOne{ margin:0px; width:100%} 
+ul.NavLevelOne li{margin:8px;}
+
+}
+
+
+@media (min-width: 481px) and (max-width: 640px) {
+
+ul.NavLevelOne{ margin:0px; width:100%;} 
+ul.NavLevelOne li { margin:10px;} 
+
+}
+
+ 
+@media (max-width: 768px) {
+
+
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+/*************** Media sizes End**************/
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="AppControls GradientLighterGray">
+        <div class="AppLeftControls">
+            <a class="btn GradientBlack" href="javascript:void(0)" id="backbtn">
+                <i class="glyphicon glyphicon-chevron-left pull-left"></i><span>Back</span></a> 
+        </div>
+        <div class="AppRightControls">
+            <a class="btn GradientBlack" href="javascript:void(0)" id="finishbtn">
+                <i class="glyphicon glyphicon-envelope pull-left"></i><span>Send Report</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form class="form-horizontal" role="form">   
+        <label id="tagtitle" for="ent-property" class="pro-lable GradientBlack"></label>  
+        <div class="btn-group row conditioncontainer" style="width:100%;">
+            <button type="button" class="btn btn-success conditionbtn" style="width:33.33%;margin-top:10px">good</button>
+            <button type="button" class="btn btn-warning conditionbtn" style="width:33.33%;margin-top:10px">ok</button>
+            <button type="button" class="btn btn-danger conditionbtn" style="width:33.34%;margin-top:10px">bad</button>
+        </div> 
+        <input type="hidden" id="conditiontxt" value="ok" />
+        <input name="tags" id="tags" value="" />
+        <span class="file-input btn btn-block btn-primary btn-file">
+            Add Photo <input type="file" id="fileupload"/>
+        </span>
+        <p class="InfoBtnOne" style="margin-top:10px;">Photos</p>
+        <div id="photocontainer">
+
+        </div>
+        <button id="savebtn" class="btn btn-success" style="width:50%;margin-top:10px;">Save</button>
+    </form>
+</div>
