@@ -45,8 +45,8 @@ $(document).ready(function() {
 
     //Loading the respective view for the user
     if (is_admin)
-        loadContent('admin.html', adminPage);
-    //loadContent('sections.html', sectionsPage);
+        //loadContent('admin.html', adminPage);
+        loadContent('sections.html', sectionsPage);
     else
         loadContent('address.html', addressPage);
 
@@ -161,6 +161,8 @@ function landlordPage() {
 
 
 function sectionsPage() {
+    //console.log("Hello");
+
     function createSections(sectionType, source) {
         var html = "";
         var createBtn = "createSectionBtn";
@@ -179,8 +181,14 @@ function sectionsPage() {
         }
         html += '<li class="btn btn-default" id="' + createBtn + '"><a href="javascript:void(0)"><span class="glyphicon glyphicon-list"></span><span class="BtnTitle">Add Section</span></a></li>';
         $(".NavLevelOne").html(html);
+        $("#add_data_div").html("<a class='btn GradientBlack' href='javascript:void(0)' id='adddata'>\n\
+                                   <i class='glyphicon glyphicon-comment pull-left'></i>\n\
+                                   <span>Add Data</span>\n\
+                                 </a>");
+
         setHandlers();
-    }
+
+    };
 
     function setHandlers() {
 
@@ -190,30 +198,29 @@ function sectionsPage() {
             selected_section = $(this).attr("data-menuvalue");
             tagtitle += sections[selected_section].name + " &#8594; ";
             parent_section = sections[selected_section];
-            console.log(parent_section);
             sections = sections[selected_section].child;
             createSections("top", sections);
-
-            /*if ((sections[selected_section].child).length) {
-             sections = sections[selected_section].child;
-             createSections("top", sections);
-             }
-             else
-             loadContent(tagprefix + 'tag.html', tagPage); */
         });
 
         $("#createSectionBtn").click(function(event) {
             event.preventDefault();
             loadContent('createsection.html', createSectionPage);
         });
+        
+         $("#adddata").click(function(event) {
+            event.preventDefault();
+            console.log("Hello there");
+            loadContent(tagprefix + 'tag.html', tagPage);
+        });
+    };
+
+
+    function static_handlers() {
 
         $("#backbtn").click(function(event) {
+            event.preventDefault();
             sectionsPage();
-        });
-
-        $("#adddata").click(function(event) {
-            //console.log(sections);
-            loadContent(tagprefix + 'tag.html', tagPage);
+            console.log("hello");
         });
 
         $("#finishbtn").click(function(event) {
@@ -221,13 +228,13 @@ function sectionsPage() {
             loadContent('email.html', sendReportPage);
         });
 
-    }
+
+    };
 
     tagtitle = "";
-
     sections = dataset;
-    //parent_section=sections;
     createSections("top", sections);
+    static_handlers();
 }
 
 function createSectionPage() {
@@ -260,42 +267,40 @@ function createSectionPage() {
  }*/
 
 function tagPage() {
+   
+   console.log(tagprefix); 
+    
+   $("#file_upload_div").html("<input class='captureinput' type='file' accept='image/*;capture=camera' />");
+    
 
-    (function() {
-        function sendFile(file) {
-            var fd = new FormData();
-            fd.append("imgfile", file);
+    function sendFile(file) {
+        var fd = new FormData();
+        fd.append("imgfile", file);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'core.php?a=fu', true);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'core.php?a=fu', true);
 
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    var resp = JSON.parse(this.response);
-                    addImageCombo(resp.id, resp.url);
-                }
-            };
-            xhr.send(fd);
-        }
-    }());
+        xhr.onload = function() {
+            if (this.status === 200) {
+                var resp = JSON.parse(this.response);
+                addImageCombo(resp.id, resp.url);
+            }
+        };
+        xhr.send(fd);
+    }
 
-    (function() {
-        function addImageCombo(id, url) {
-            $("#photocontainer").append('<img id="img_' + id + '" src="' + url + '" style="max-width: 70%;margin-top:10px" class="imgattachment" />');
-            $("#photocontainer").append('<button id="btn_' + id + '" class="btn btn-danger" data-imgid="' + id + '" style="width:50%;margin-top:10px" >Delete</button>');
-            $("#btn_" + id).click(function(event) {
-                event.preventDefault();
-                $("#img_" + $(this).attr("data-imgid")).remove();
-                $(this).remove();
-            });
-        }
-    }());
+    function addImageCombo(id, url) {
+        $("#photocontainer").append('<img id="img_' + id + '" src="' + url + '" style="max-width: 70%;margin-top:10px" class="imgattachment" />');
+        $("#photocontainer").append('<button id="btn_' + id + '" class="btn btn-danger" data-imgid="' + id + '" style="width:50%;margin-top:10px" >Delete</button>');
+        $("#btn_" + id).click(function(event) {
+            event.preventDefault();
+            $("#img_" + $(this).attr("data-imgid")).remove();
+            $(this).remove();
+        });
+    }
 
 
     function loadData() {
-
-        //var d = sections;
-
 
         if (parent_section.condition)
             $("#conditiontxt").val(parent_section.condition);
@@ -356,8 +361,6 @@ function tagPage() {
         parent_section.images = imgs,
         parent_section.condition = $("#conditiontxt").val();
 
-
-        //console.log(dataset);
         loadContent('sections.html', sectionsPage);
     });
 
@@ -382,7 +385,7 @@ function tagPage() {
 function sendReportPage() {
     $("#sendbtn").click(function(event) {
         event.preventDefault();
-     
+
         console.log(dataset);
 
         base.recipient = $("#emailtxt").val();

@@ -61,6 +61,5 @@ function path(){
          var PATH="<?php echo path(); ?>";
         </script>
         <script src="js/application.js"></script>
-
     </body>
 </html>
