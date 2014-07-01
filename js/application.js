@@ -45,8 +45,8 @@ $(document).ready(function() {
 
     //Loading the respective view for the user
     if (is_admin)
-        //loadContent('admin.html', adminPage);
-        loadContent('sections.html', sectionsPage);
+        loadContent('admin.html', adminPage);
+        //loadContent('sections.html', sectionsPage);
     else
         loadContent('address.html', addressPage);
 
@@ -81,6 +81,9 @@ function adminPage() {
             $("#menuparent").html($.parseJSON(data));
         });
     }());
+
+    $("#menubtn").unbind();
+    $("#deldata").unbind();
 
     //event handel to create menu
     $("#menubtn").click(function(event) {
@@ -135,9 +138,6 @@ function adminPage() {
         adminPage();
 
     });
-
-
-
 }
 
 
@@ -161,7 +161,6 @@ function landlordPage() {
 
 
 function sectionsPage() {
-    //console.log("Hello");
 
     function createSections(sectionType, source) {
         var html = "";
@@ -181,20 +180,15 @@ function sectionsPage() {
         }
         html += '<li class="btn btn-default" id="' + createBtn + '"><a href="javascript:void(0)"><span class="glyphicon glyphicon-list"></span><span class="BtnTitle">Add Section</span></a></li>';
         $(".NavLevelOne").html(html);
-        $("#add_data_div").html("<a class='btn GradientBlack' href='javascript:void(0)' id='adddata'>\n\
-                                   <i class='glyphicon glyphicon-comment pull-left'></i>\n\
-                                   <span>Add Data</span>\n\
-                                 </a>");
-
+        unbindHandlers();
         setHandlers();
+    }
 
-    };
 
     function setHandlers() {
 
         $("._section").click(function(event) {
             event.preventDefault();
-
             selected_section = $(this).attr("data-menuvalue");
             tagtitle += sections[selected_section].name + " &#8594; ";
             parent_section = sections[selected_section];
@@ -206,35 +200,36 @@ function sectionsPage() {
             event.preventDefault();
             loadContent('createsection.html', createSectionPage);
         });
-        
-         $("#adddata").click(function(event) {
+
+        $("#adddata").click(function(event) {
             event.preventDefault();
-            console.log("Hello there");
             loadContent(tagprefix + 'tag.html', tagPage);
         });
-    };
-
-
-    function static_handlers() {
 
         $("#backbtn").click(function(event) {
             event.preventDefault();
             sectionsPage();
-            console.log("hello");
         });
 
         $("#finishbtn").click(function(event) {
             event.preventDefault();
             loadContent('email.html', sendReportPage);
         });
+    }
 
 
-    };
+    function unbindHandlers() {
+        $("._section").unbind();
+        $("#createSectionBtn").unbind();
+        $("#adddata").unbind();
+        $("#backbtn").unbind();
+        $("#finishbtn").unbind();
+    }
 
     tagtitle = "";
     sections = dataset;
     createSections("top", sections);
-    static_handlers();
+
 }
 
 function createSectionPage() {
@@ -253,25 +248,8 @@ function createSectionPage() {
     });
 }
 
-/*function createSubPage() {
- $("#createSubBtn").click(function(event) {
- event.preventDefault();
- sections[selected_section].push($("#subtxt").val());
- loadContent('sections.html', sectionsPage);
- });
- 
- $("#cancelBtn").click(function(event) {
- event.preventDefault();
- loadContent('sections.html', sectionsPage);
- });
- }*/
 
 function tagPage() {
-   
-   console.log(tagprefix); 
-    
-   $("#file_upload_div").html("<input class='captureinput' type='file' accept='image/*;capture=camera' />");
-    
 
     function sendFile(file) {
         var fd = new FormData();
@@ -329,60 +307,88 @@ function tagPage() {
 
     $('#tags').tagsInput();
     loadData();
-    if (tagprefix === "") {
-        $(".captureuploader").on("tap", function() {
-            $('input.captureinput[type=file]').click();
+
+
+    function _unbindHandler() {
+
+        if (tagprefix === "") {
+            $(".captureuploader").unbind();
+            $(".captureinput").unbind();
+        } else {
+            $(document).unbind();
+            $("#fileupload").unbind();
+        }
+
+        $("#savebtn").unbind();
+        $(".conditionbtn").unbind();
+        $("#backbtn").unbind();
+        $("#finishbtn").unbind();
+    }
+
+
+    function _Handler() {
+
+        if (tagprefix === "") {
+            $(".captureuploader").on("tap", function() {
+                $('input.captureinput[type=file]').click();
+            });
+
+            $('.captureinput').change(function() {
+                var file = this.files[0];
+                sendFile(file);
+            });
+        } else {
+            $(document).on("change", "#fileupload", function() {
+                var file = document.getElementById("fileupload").files[0];
+                sendFile(file);
+            });
+        }
+
+
+        $("#savebtn").click(function(event) {
+            event.preventDefault();
+            var imgs = "";
+            $(".imgattachment").each(function(index, value) {
+                imgs += $(value).attr("src") + ",";
+            });
+            if (imgs.indexOf(","))
+                imgs = imgs.substring(0, imgs.length - 1);
+
+
+            parent_section.tags = $("#tags").val();
+            parent_section.images = imgs;
+            parent_section.condition = $("#conditiontxt").val();
+            loadContent('sections.html', sectionsPage);
         });
 
-        $('.captureinput').change(function() {
-            var file = this.files[0];
-            sendFile(file);
+        $(".conditionbtn").click(function(event) {
+            event.preventDefault();
+            $("#conditiontxt").val($(this).html());
+            $(".conditioncontainer").remove();
+        });
+
+        $("#backbtn").click(function(event) {
+            event.preventDefault();
+            loadContent('sections.html', sectionsPage);
+        });
+
+        $("#finishbtn").click(function(event) {
+            event.preventDefault();
+            loadContent('email.html', sendReportPage);
         });
     }
-    else {
-        $(document).on("change", "#fileupload", function() {
-            var file = document.getElementById("fileupload").files[0];
-            sendFile(file);
-        });
-    }
-
-
-    $("#savebtn").click(function(event) {
-        event.preventDefault();
-        var imgs = "";
-        $(".imgattachment").each(function(index, value) {
-            imgs += $(value).attr("src") + ",";
-        });
-        if (imgs.indexOf(","))
-            imgs = imgs.substring(0, imgs.length - 1);
-
-
-        parent_section.tags = $("#tags").val();
-        parent_section.images = imgs,
-        parent_section.condition = $("#conditiontxt").val();
-
-        loadContent('sections.html', sectionsPage);
-    });
-
-    $(".conditionbtn").click(function(event) {
-        event.preventDefault();
-        $("#conditiontxt").val($(this).html());
-        $(".conditioncontainer").remove();
-    });
-
-    $("#backbtn").click(function(event) {
-        event.preventDefault();
-        loadContent('sections.html', sectionsPage);
-    });
-
-    $("#finishbtn").click(function(event) {
-        event.preventDefault();
-        loadContent('email.html', sendReportPage);
-    });
-
+    
+    _unbindHandler();
+    _Handler();
+    
 }
 
 function sendReportPage() {
+    
+    
+    $("#sendbtn").unbind();
+    $("#backbtn").unbind();
+    
     $("#sendbtn").click(function(event) {
         event.preventDefault();
 

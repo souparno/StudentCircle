@@ -40,7 +40,7 @@ function write_to_pdf(&$pdf, $data, $x = 10, &$y = 40, $tier = 1) {
 
         if (isset($value->condition))
             $pdf->Text($x, $col+=5, "condition : " . $value->condition);
-        
+
         //if (isset($value->images))
         //    $pdf->Text($x, $col+=5, "images : " . $value->images);
 
@@ -48,18 +48,22 @@ function write_to_pdf(&$pdf, $data, $x = 10, &$y = 40, $tier = 1) {
 
         if ($tier == 1) {
             $images = "";
-            $img="";
             get_images($value->child, $images);
-            if (isset($value->images))
-                   $img=$value->images;
-            $images .= $img.",". substr($images, 0, -1);
-            $_img = explode(",", $images);
-            foreach ($_img as $v){
-                //$pdf->Image($v, $x, $col+70, 60, 60);
-                $pdf->Text($x, $col+=5, "images : " . $v);
-                //$pdf->Image($v, $pdf->GetX(), $pdf->GetY(), 33.78);
+            if (isset($value->images)) {
+                $images = $value->images . "," . substr($images, 0, -1);
+            } else {
+                $images = substr($images, 0, -1);
             }
-            //$pdf->Text($x, $col+=5, "images : " . $images);
+            $_img = explode(",", $images);
+
+            if (count($_img) > 1) {
+                foreach ($_img as $v) {
+                    //$pdf->Image($v, $x, $col=+70, 60, 60);
+                    $pdf->Text($x, $col+=5, "images : " . $v);
+                    //$pdf->Image($v, $pdf->GetX(), $pdf->GetY(), 33.78);
+                }
+                //$pdf->Text($x, $col+=5, "images : " . substr($images, 0, -1));
+            }
         }
 
         write_to_pdf($pdf, $value->child, $x + 10, $col+=10, $tier + 1);
@@ -69,12 +73,11 @@ function write_to_pdf(&$pdf, $data, $x = 10, &$y = 40, $tier = 1) {
 
 function get_images($data, &$image) {
     $images = &$image;
-    //$images.="Hello there";
     foreach ($data as $value):
-        if (isset($value->images))
-          $images.=$value->images . ",";
-          //$images.="Hello there";
-        get_images($data->child, $images);
+        if (isset($value->images)) {
+            $images.=$value->images . ",";
+        }
+        get_images($value->child, $images);
     endforeach;
 }
 
