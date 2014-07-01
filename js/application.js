@@ -354,10 +354,10 @@ function tagPage() {
 
         parent_section.tags = $("#tags").val();
         parent_section.images = imgs,
-                parent_section.conditioin = $("#conditiontxt").val();
+        parent_section.condition = $("#conditiontxt").val();
 
 
-        console.log(dataset);
+        //console.log(dataset);
         loadContent('sections.html', sectionsPage);
     });
 
@@ -382,6 +382,8 @@ function tagPage() {
 function sendReportPage() {
     $("#sendbtn").click(function(event) {
         event.preventDefault();
+     
+        console.log(dataset);
 
         base.recipient = $("#emailtxt").val();
         data.base = base;
