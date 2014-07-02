@@ -57,17 +57,32 @@ function write_to_pdf(&$pdf, $data, $x = 10, &$y = 40, $tier = 1) {
             $_img = explode(",", $images);
 
             if (count($_img) > 1) {
+                $pos = 5;
+                $pos2 = 0;
+                $count = 1;
+                $col+=2;
                 foreach ($_img as $v) {
-                    //$pdf->Image($v, $x, $col=+70, 60, 60);
-                    $pdf->Text($x, $col+=5, "images : " . $v);
-                    //$pdf->Image($v, $pdf->GetX(), $pdf->GetY(), 33.78);
+                    if ($v != "") {
+                        $pdf->Image($v, $x + $pos, $col + $pos2, 40, 40);
+                        if (!($count % 4)) {
+                            $pos = 5;
+                            $pos2 = 0;
+                            $col+=42;
+                        } else {
+                            $pos+=50;
+                        }
+                        $count++;
+                        //$pdf->Text($x, $col+=5, "images : " . $v);
+                    }
                 }
-                //$pdf->Text($x, $col+=5, "images : " . substr($images, 0, -1));
+                if($count>1){ 
+                    //$col+=round((($count - 1) % 4),-1) * 40;
+                    if(($count - 1) % 4) $col+=42;
+                    //$pdf->Text($x, $col, "count : " . $count ." and after div".  round((($count - 1) % 4),-1) * 40);
+                }
             }
         }
-
         write_to_pdf($pdf, $value->child, $x + 10, $col+=10, $tier + 1);
-
     endforeach;
 }
 
